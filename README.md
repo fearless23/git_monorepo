@@ -46,3 +46,31 @@ So far, we have a repo for large front end app(typically react, angular or vue),
 
 We have 3 repos thus a multi-repo approach, but the 3rd one is a mono-repo of independent AWS Lambda`s.
 
+### But, we have one problem as with any mono-repo…
+
+Say a team of 5 people working on 70 odd lambdas, where each developer typically work on 10–20 lambdas. Now, a developer don`t want to download or changes made to rest of 50–60 lambdas he/she not working on.
+
+So pull master branch with all of code everytime will be in-efficient,
+
+```bash
+git pull master
+```
+
+However there is a way to do it
+
+1. Create a shared branch for shared modules.
+2. Create multiple branches from shared branch where each branch starts with empty folder. say branches = `lambda1`, `lambda2`
+3. Pull shared branch with `git pull origin shared`
+4. Then merge changes first checkout your branch say `lambda1`, `git merge shared` with merge latest shared folder into `lambda1` branch locally and push to remote `lambda1` branch.
+  
+*Note: Don\`t merge your branch with master in this scenario, but can do so for css framework example.*
+
+Thus, every branch on remote has shared modules and specific micro-service code along with unit tests if any.
+
+I haven\`t explored git worktree.
+
+```bash
+ git worktree add
+```
+
+Please provide feedback if you any other way of managing lambda or kubernetes code.
