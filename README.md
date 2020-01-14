@@ -58,14 +58,15 @@ git pull master
 
 However there is a way to do it
 
-1. Create a shared branch for shared modules.
-2. Create multiple branches from shared branch where each branch starts with empty folder. say branches = `lambda1`, `lambda2`
-3. Pull shared branch with `git pull origin shared`
-4. Then merge changes first checkout your branch say `lambda1`, `git merge shared` with merge latest shared folder into `lambda1` branch locally and push to remote `lambda1` branch.
-  
+1. Create a shared branch for shared modules, few developer can work on this.
+2. Pull shared branch with `git pull origin shared`
+3. Create multiple branches from latest shared branch commit where each branch add additional folder for lambda code. say branches = `lambda1`, `lambda2`. If branch already exists skip step 3.
+4. Then merge changes first checkout your branch say `lambda1`, `git merge --squash shared` with merge latest shared folder into `lambda1` branch locally, work on `lambda1` and push to remote `lambda1` branch.
+
+*Note: Each lambda branch acts as a master; merge --squash keep history of every branch linear.*
 *Note: Don\`t merge your branch with master in this scenario, but can do so for css framework example.*
 
-Thus, every branch on remote has shared modules and specific micro-service code along with unit tests if any.
+Thus, every branch on remote has shared modules and specific micro-service code.
 
 I haven\`t explored git worktree.
 
